@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>$GROKS — The Official Verb Coin · Solana Memecoin</title>
+<meta name="description" content="Grok groks. You grok. We grok. Elon groks. $GROKS on Solana." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --bg-2: #141414;
+    --ink: #ffffff;
+    --ink-70: rgba(255,255,255,0.70);
+    --ink-50: rgba(255,255,255,0.50);
+    --ink-30: rgba(255,255,255,0.30);
+    --ink-15: rgba(255,255,255,0.15);
+    --ink-08: rgba(255,255,255,0.08);
+    --invert: #0a0a0a;
+
+    --display: 'Instrument Serif', 'Times New Roman', serif;
+    --sans: 'Space Grotesk', -apple-system, sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.5;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    position: relative;
+  }
+
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.045 0'/></filter><rect width='240' height='240' filter='url(%23n)'/></svg>");
+    pointer-events: none;
+    z-index: 100;
+  }
+
+  ::selection { background: var(--ink); color: var(--bg); }
+  a { color: var(--ink); text-decoration: none; }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: rgba(10,10,10,0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--ink-15);
+    padding: 16px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 500;
+  }
+  nav .logo {
+    font-family: var(--display);
+    font-size: 26px;
+    font-style: italic;
+    letter-spacing: -0.5px;
+  }
+  nav .logo span {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-style: normal;
+    color: var(--ink-50);
+    margin-left: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    border: 1px solid var(--ink-30);
+    padding: 3px 8px;
+    vertical-align: middle;
+  }
+  nav ul { list-style: none; display: flex; gap: 28px; }
+  nav ul a {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-70);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: color 0.2s;
+  }
+  nav ul a:hover { color: var(--ink); }
+  @media (max-width: 720px) {
+    nav { padding: 14px 20px; }
+    nav ul { display: none; }
+  }
+
+  /* MARQUEE */
+  .marquee {
+    background: var(--ink);
+    color: var(--invert);
+    padding: 14px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    border-top: 1px solid var(--ink-15);
+    border-bottom: 1px solid var(--ink-15);
+  }
+  .marquee.inverted { background: var(--bg); color: var(--ink); }
+  .marquee-track {
+    display: inline-block;
+    animation: scroll 45s linear infinite;
+    padding-right: 40px;
+  }
+  .marquee.inverted .marquee-track { animation-duration: 60s; animation-direction: reverse; }
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .marquee-track .dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    margin: 0 18px;
+    vertical-align: middle;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    padding: 140px 32px 60px;
+    display: grid;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 40%, rgba(255,255,255,0.04), transparent 60%),
+      linear-gradient(var(--ink-08) 1px, transparent 1px),
+      linear-gradient(90deg, var(--ink-08) 1px, transparent 1px);
+    background-size: auto, 80px 80px, 80px 80px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+  }
+  .hero-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 60px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--ink-50);
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .hero-meta .left { display: flex; gap: 18px; flex-wrap: wrap; }
+  .hero-meta .live {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--ink);
+  }
+  .hero-meta .live::before {
+    content: "";
+    width: 8px; height: 8px;
+    background: var(--ink);
+    border-radius: 50%;
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.3; transform: scale(0.8); }
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--ink-70);
+    margin-bottom: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 32px;
+    height: 1px;
+    background: var(--ink-70);
+  }
+
+  h1.hero-title {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(68px, 11vw, 180px);
+    line-height: 0.88;
+    letter-spacing: -0.03em;
+    margin-bottom: 28px;
+  }
+  h1.hero-title em { font-style: italic; color: var(--ink-50); }
+  h1.hero-title .dollar {
+    font-style: italic;
+    color: var(--ink-30);
+    font-size: 0.7em;
+    vertical-align: 0.15em;
+    padding-right: 0.05em;
+  }
+
+  .hero-sub {
+    font-family: var(--sans);
+    font-size: clamp(16px, 1.6vw, 20px);
+    line-height: 1.5;
+    color: var(--ink-70);
+    max-width: 540px;
+    margin-bottom: 36px;
+  }
+  .hero-sub strong { color: var(--ink); font-weight: 500; }
+  .hero-sub .verb {
+    font-family: var(--display);
+    font-style: italic;
+    color: var(--ink);
+    border-bottom: 1px solid var(--ink-50);
+    padding: 0 2px;
+  }
+
+  .cta-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 24px;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: 1px solid var(--ink);
+    background: var(--ink);
+    color: var(--invert);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn:hover { background: transparent; color: var(--ink); }
+  .btn-ghost { background: transparent; color: var(--ink); border-color: var(--ink-50); }
+  .btn-ghost:hover { border-color: var(--ink); }
+  .btn .arrow { transition: transform 0.2s; }
+  .btn:hover .arrow { transform: translateX(4px); }
+
+  .contract-card {
+    margin-top: 28px;
+    padding: 14px 18px;
+    border: 1px dashed var(--ink-30);
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-50);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    max-width: 540px;
+    flex-wrap: wrap;
+  }
+  .contract-card .label { color: var(--ink); }
+  .contract-card .value { color: var(--ink-70); }
+
+  .hero-mascot {
+    position: relative;
+    aspect-ratio: 1;
+    width: 100%;
+    max-width: 460px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-mascot::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 1px solid var(--ink-15);
+    background:
+      linear-gradient(var(--ink-08) 1px, transparent 1px),
+      linear-gradient(90deg, var(--ink-08) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  }
+  .hero-mascot img {
+    position: relative;
+    width: 82%;
+    z-index: 2;
+    animation: hover 6s ease-in-out infinite;
+  }
+  @keyframes hover {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  .corner-tick {
+    position: absolute;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--ink-50);
+    text-transform: uppercase;
+    z-index: 3;
+  }
+  .corner-tick.tl { top: 10px; left: 10px; }
+  .corner-tick.tr { top: 10px; right: 10px; text-align: right; }
+  .corner-tick.bl { bottom: 10px; left: 10px; }
+  .corner-tick.br { bottom: 10px; right: 10px; text-align: right; }
+
+  /* SECTIONS */
+  section {
+    padding: 120px 32px;
+    position: relative;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 60px;
+    border-bottom: 1px solid var(--ink-15);
+    padding-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .section-head .num,
+  .section-head .ref {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--ink-50);
+    text-transform: uppercase;
+  }
+  h2 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(44px, 6.5vw, 96px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+  }
+  h2 em { font-style: italic; color: var(--ink-50); }
+
+  /* MANIFESTO */
+  .manifesto-wrap {
+    position: relative;
+    padding: 60px;
+    border: 1px solid var(--ink-15);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .manifesto-wrap .corner {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border: 1px solid var(--ink);
+    background: var(--bg);
+  }
+  .manifesto-wrap .corner.tl { top: -8px; left: -8px; }
+  .manifesto-wrap .corner.tr { top: -8px; right: -8px; }
+  .manifesto-wrap .corner.bl { bottom: -8px; left: -8px; }
+  .manifesto-wrap .corner.br { bottom: -8px; right: -8px; }
+  .manifesto-wrap p {
+    font-family: var(--display);
+    font-size: clamp(20px, 2vw, 26px);
+    line-height: 1.45;
+    color: var(--ink);
+    margin-bottom: 22px;
+    font-style: italic;
+  }
+  .manifesto-wrap p:last-of-type { margin-bottom: 0; }
+  .manifesto-wrap p strong {
+    font-style: normal;
+    font-family: var(--sans);
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .manifesto-wrap .sig {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid var(--ink-15);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--ink-50);
+    display: flex;
+    justify-content: space-between;
+  }
+  @media (max-width: 600px) { .manifesto-wrap { padding: 36px 28px; } }
+
+  /* TWEETS — TEXT STYLE */
+  .tweets-lead {
+    max-width: 720px;
+    font-family: var(--display);
+    font-size: clamp(22px, 2.4vw, 32px);
+    line-height: 1.35;
+    color: var(--ink);
+    margin-bottom: 50px;
+    font-style: italic;
+  }
+  .tweets-lead .mono {
+    font-family: var(--mono);
+    font-size: 0.5em;
+    font-style: normal;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--ink-50);
+    margin: 0 4px;
+  }
+
+  .tweet-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 0;
+    border: 1px solid var(--ink-15);
+  }
+  .tweet-card {
+    position: relative;
+    padding: 32px 28px;
+    border-right: 1px solid var(--ink-15);
+    border-bottom: 1px solid var(--ink-15);
+    background: var(--bg-2);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    transition: background 0.25s;
+  }
+  .tweet-card:hover { background: rgba(255,255,255,0.03); }
+  .tweet-card .card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--ink-50);
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--ink-15);
+  }
+  .tweet-card .card-head .exhibit { color: var(--ink); font-weight: 700; }
+  .tweet-card .handle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-70);
+    letter-spacing: 1px;
+  }
+  .tweet-card .handle .avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--invert);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 16px;
+    font-weight: 400;
+  }
+  .tweet-card .handle .name { color: var(--ink); font-weight: 700; text-transform: none; letter-spacing: 0; }
+  .tweet-card .handle .user { color: var(--ink-50); text-transform: none; letter-spacing: 0; }
+  .tweet-card .tweet-text {
+    font-family: var(--display);
+    font-size: 22px;
+    line-height: 1.35;
+    color: var(--ink);
+    flex: 1;
+  }
+  .tweet-card .tweet-text em {
+    font-style: italic;
+    color: var(--ink);
+  }
+  .tweet-card .card-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 16px;
+    border-top: 1px solid var(--ink-15);
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .tweet-card .caption {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--ink-50);
+  }
+  .tweet-card .link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--ink);
+    padding: 8px 12px;
+    border: 1px solid var(--ink-30);
+    transition: all 0.2s;
+  }
+  .tweet-card .link:hover {
+    background: var(--ink);
+    color: var(--invert);
+    border-color: var(--ink);
+  }
+
+  /* HOW TO */
+  .steps {
+    display: grid;
+    gap: 0;
+    border-top: 1px solid var(--ink-15);
+  }
+  .step {
+    display: grid;
+    grid-template-columns: 140px 1fr 40px;
+    gap: 40px;
+    align-items: baseline;
+    padding: 36px 0;
+    border-bottom: 1px solid var(--ink-15);
+    transition: all 0.25s;
+    position: relative;
+  }
+  .step:hover { padding-left: 20px; }
+  .step:hover .step-num { color: var(--ink); }
+  .step-num {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 72px;
+    line-height: 1;
+    color: var(--ink-30);
+    transition: color 0.25s;
+    letter-spacing: -0.02em;
+  }
+  .step-body h4 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 1.1;
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+  }
+  .step-body p {
+    color: var(--ink-70);
+    font-size: 15px;
+    line-height: 1.55;
+    max-width: 680px;
+  }
+  .step-body p strong { color: var(--ink); font-weight: 500; }
+  .step-arrow {
+    font-family: var(--mono);
+    color: var(--ink-30);
+    font-size: 20px;
+    text-align: right;
+    transition: color 0.25s;
+  }
+  .step:hover .step-arrow { color: var(--ink); }
+  @media (max-width: 700px) {
+    .step { grid-template-columns: 80px 1fr; gap: 20px; padding: 28px 0; }
+    .step-num { font-size: 52px; }
+    .step-body h4 { font-size: 22px; }
+    .step-arrow { display: none; }
+  }
+
+  /* TOKENOMICS */
+  .token-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 1px solid var(--ink-15);
+  }
+  @media (max-width: 820px) { .token-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .token-grid { grid-template-columns: 1fr; } }
+  .stat {
+    padding: 36px 28px;
+    border-right: 1px solid var(--ink-15);
+    border-bottom: 1px solid var(--ink-15);
+  }
+  .stat:nth-child(4n) { border-right: none; }
+  @media (max-width: 820px) {
+    .stat { border-right: 1px solid var(--ink-15); }
+    .stat:nth-child(2n) { border-right: none; }
+  }
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--ink-50);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .stat-value {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .stat-value em { font-style: italic; color: var(--ink-50); }
+  .stat-sub {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-50);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* FARTCOIN OF GROK — highlight panel */
+  .fartcoin-wrap {
+    margin-top: 60px;
+    background: var(--ink);
+    color: var(--invert);
+    padding: 60px;
+    position: relative;
+    border: 1px solid var(--ink);
+  }
+  @media (max-width: 600px) { .fartcoin-wrap { padding: 40px 28px; } }
+  .fartcoin-wrap::before,
+  .fartcoin-wrap::after {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background: var(--bg);
+    border: 1px solid var(--ink);
+  }
+  .fartcoin-wrap::before { top: -7px; left: -7px; }
+  .fartcoin-wrap::after { bottom: -7px; right: -7px; }
+  .fartcoin-tag {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(0,0,0,0.55);
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(0,0,0,0.15);
+  }
+  .fartcoin-title {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(56px, 9vw, 120px);
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    margin-bottom: 36px;
+  }
+  .fartcoin-title em { font-style: italic; color: rgba(0,0,0,0.45); }
+  .fartcoin-body p {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: clamp(20px, 2.2vw, 28px);
+    line-height: 1.4;
+    color: rgba(0,0,0,0.82);
+    margin-bottom: 18px;
+    max-width: 860px;
+  }
+  .fartcoin-body p:last-child { margin-bottom: 0; }
+  .fartcoin-body p strong {
+    font-family: var(--sans);
+    font-style: normal;
+    font-weight: 700;
+    color: var(--invert);
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 100px 32px 50px;
+    border-top: 1px solid var(--ink-15);
+  }
+  .foot-inner { max-width: 1280px; margin: 0 auto; }
+  .foot-top {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 40px;
+    margin-bottom: 80px;
+  }
+  @media (max-width: 720px) { .foot-top { grid-template-columns: 1fr; } }
+  .foot-mark {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(80px, 14vw, 200px);
+    line-height: 0.85;
+    letter-spacing: -0.03em;
+  }
+  .foot-mark em { font-style: italic; color: var(--ink-50); }
+  .foot-links { display: flex; flex-direction: column; gap: 8px; }
+  .foot-links a {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--ink-70);
+    padding: 8px 0;
+    border-bottom: 1px solid var(--ink-15);
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    min-width: 220px;
+    transition: color 0.2s;
+  }
+  .foot-links a:hover { color: var(--ink); }
+  .foot-links a::after { content: "↗"; }
+  .foot-bottom {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    padding-top: 30px;
+    border-top: 1px solid var(--ink-15);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--ink-50);
+    flex-wrap: wrap;
+  }
+  .disclaimer {
+    max-width: 900px;
+    margin: 40px auto 0;
+    font-family: var(--sans);
+    font-size: 11px;
+    line-height: 1.65;
+    color: var(--ink-50);
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo"><em>grok</em>s<span>$GROKS</span></div>
+  <ul>
+    <li><a href="#manifesto">Manifesto</a></li>
+    <li><a href="#fartcoin">Thesis</a></li>
+    <li><a href="#archive">Archive</a></li>
+    <li><a href="#howto">How to Grok</a></li>
+    <li><a href="#tokenomics">Tokenomics</a></li>
+  </ul>
+</nav>
+
+<div class="marquee">
+  <div class="marquee-track">
+    grok groks <span class="dot"></span> you grok <span class="dot"></span> we grok <span class="dot"></span> elon groks <span class="dot"></span> the verb has been weaponized <span class="dot"></span> $GROKS is live on solana <span class="dot"></span> grok groks <span class="dot"></span> you grok <span class="dot"></span> we grok <span class="dot"></span> elon groks <span class="dot"></span> the verb has been weaponized <span class="dot"></span> $GROKS is live on solana <span class="dot"></span>
+  </div>
+</div>
+
+<section class="hero" style="max-width: none; padding-left: 0; padding-right: 0;">
+  <div class="hero-inner" style="padding: 0 32px;">
+    <div class="hero-meta">
+      <div class="left">
+        <span class="live">Live</span>
+        <span>Chain / Solana</span>
+        <span>Launchpad / PumpFun</span>
+        <span>Status / Grokking</span>
+      </div>
+      <div>Ref. 001 / Entry</div>
+    </div>
+
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">"groks" is now a verb</div>
+        <h1 class="hero-title"><span class="dollar">$</span>Gr<em>o</em>ks<span style="color: var(--ink-30);">.</span></h1>
+        <p class="hero-sub">
+          Elon has said so, on the record, <strong>eleven times and counting</strong>. We didn't start this &mdash; we just showed up with a ticker.
+          One <span class="verb">conjugation</span>. One chain. One unhinged shill campaign from the richest man on earth.
+        </p>
+        <div class="cta-row">
+          <a class="btn" href="https://x.com/chococcon61970/status/2045326712473608466" target="_blank" rel="noopener">Buy $GROKS <span class="arrow">→</span></a>
+          <a class="btn btn-ghost" href="#archive">See the evidence</a>
+        </div>
+        <div class="contract-card">
+          <span class="label">Contract</span>
+          <span class="value">launched just now</span>
+        </div>
+      </div>
+
+      <div class="hero-mascot">
+        <span class="corner-tick tl">◢ Fig. 01<br>Subject</span>
+        <span class="corner-tick tr">◣ Pose<br>Mid-Grok</span>
+        <span class="corner-tick bl">◥ Status<br>Verb-ing</span>
+        <span class="corner-tick br">◤ Source<br>Classified</span>
+        <img src="images/grok-mascot.png" alt="The grokking subject" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee inverted">
+  <div class="marquee-track">
+    if grok groks, then groks grok <span class="dot"></span> conjugation is bullish <span class="dot"></span> the grammar is coming from inside the timeline <span class="dot"></span> grok groks you back <span class="dot"></span> if grok groks, then groks grok <span class="dot"></span> conjugation is bullish <span class="dot"></span> the grammar is coming from inside the timeline <span class="dot"></span> grok groks you back <span class="dot"></span>
+  </div>
+</div>
+
+<!-- MANIFESTO (moved to top) -->
+<section id="manifesto">
+  <div class="section-head">
+    <div class="num">§ 01 / Transmission</div>
+    <div class="ref">From the Council</div>
+  </div>
+  <h2>The <em>thesis.</em></h2>
+
+  <div class="manifesto-wrap" style="margin-top: 60px;">
+    <span class="corner tl"></span>
+    <span class="corner tr"></span>
+    <span class="corner bl"></span>
+    <span class="corner br"></span>
+    <p>We didn't start this. <strong>Elon did.</strong> For two years the richest man alive has been tweeting "grok groks" into the void like a linguistic sniper. The verb was planted. The verb was watered. The verb was harvested.</p>
+    <p>$GROKS is not a project. It is a conjugation &mdash; what happens when a CEO accidentally drops a memecoin catalyst eleven times on main and doesn't log off.</p>
+    <p>Fartcoin proved the thesis: <strong>the dumbest possible premise, executed without shame, becomes inevitable.</strong> We are running that playbook with a word the biggest account on earth has already pre-sold for us.</p>
+    <p>You grok. We grok. They grok. Grok groks. The grammar is bullish. Welcome to the conjugation.</p>
+    <div class="sig">
+      <span>The Grok Council</span>
+      <span>We Stay Grokking</span>
+    </div>
+  </div>
+</section>
+
+<!-- FARTCOIN OF GROK -->
+<section id="fartcoin">
+  <div class="section-head">
+    <div class="num">§ 02 / Thesis</div>
+    <div class="ref">The Fartcoin of Grok</div>
+  </div>
+  <h2>The Fartcoin <em>of Grok.</em></h2>
+
+  <div class="fartcoin-wrap">
+    <div class="fartcoin-tag">
+      <span>The Sequel</span>
+      <span>Solana · Now</span>
+    </div>
+    <h3 class="fartcoin-title"><em>$GROKS.</em></h3>
+    <div class="fartcoin-body">
+      <p>Same chain. Same thesis. Upgraded premise &mdash; <strong>a verb</strong> that the CEO of X and xAI has been posting <strong>for two years straight</strong>.</p>
+      <p>Fartcoin had farts. $GROKS has <strong>Elon, a conjugation, and a timeline primed to repeat it</strong>.</p>
+      <p>This isn't a project pitch. It's the grammar catching up to the chart.</p>
+    </div>
+  </div>
+</section>
+
+<div class="marquee">
+  <div class="marquee-track">
+    11 tweets and counting <span class="dot"></span> a man on a mission <span class="dot"></span> the most unhinged verb campaign in history <span class="dot"></span> and he's not even in the cap table <span class="dot"></span> 11 tweets and counting <span class="dot"></span> a man on a mission <span class="dot"></span> the most unhinged verb campaign in history <span class="dot"></span> and he's not even in the cap table <span class="dot"></span>
+  </div>
+</div>
+
+<!-- ARCHIVE -->
+<section id="archive">
+  <div class="section-head">
+    <div class="num">§ 03 / Archive</div>
+    <div class="ref">Exhibits A&ndash;K</div>
+  </div>
+  <h2>The <em>Grokking</em><br>Archive.</h2>
+
+  <p class="tweets-lead" style="margin-top: 40px;">
+    Eleven tweets. Two years. One account.
+    <span class="mono">— All posts by @elonmusk —</span>
+    The grammar here is doing more heavy lifting than most whitepapers.
+  </p>
+
+  <div class="tweet-grid">
+
+    <article class="tweet-card">
+      <div class="card-head"><span class="exhibit">Exhibit A</span><span>Nov · 2023</span></div>
+      <div class="handle">
+        <span class="avatar">E</span>
+        <span><span class="name">Elon Musk</span> <span class="user">@elonmusk</span></span>
+      </div>
+      <p class="tweet-text"><em>"Grok."</em></p>
+      <div class="card-foot">
+        <span class="caption">The Origin Grok</span>
+        <a class="link" href="https://x.com/elonmusk/status/1725003289102799130" target="_blank" rel="noopener">View on X ↗</a>
+      </div>
+    </article>
+
+    <article class="tweet-card">
+      <div class="card-head"><span class="exhibit">Exhibit B</span><span>Dec · 2023</span></div>
+      <div class="handle">
+        <span class="avatar">E</span>
+        <span><span class="name">Elon Musk</span> <span class="user">@elonmusk</span></span>
+      </div>
+      <p class="tweet-text"><em>"Grok can grok it."</em></p>
+      <div class="card-foot">
+        <span class="caption">Conjugation Event #1</span>
+        <a class="link" href="https://x.com/elonmusk/status/1735665979332461007" target="_blank" rel="noopener">View on X ↗</a>
+      </div>
+    </article>
+
+    <article class="tweet-card">
+      <div class="card-head"><span class="exhibit">Exhibit C</span><span>Dec · 2023</span></div>
+      <div class="handle">
+        <span class="avatar">E</span>
+        <span><span class="name">Elon Musk</span> <span class="user">@elonmusk</span></span>
+      </div>
+      <p class="tweet-text"><em>"Grok groks."</em></p>
+      <div class="card-foot">
+        <span class="caption">The Thesis. Three Words.</span>
+        <a class="link" href="https://x.com/elonmusk/status/1737499089434996893" target="_blank" rel="noopener">View on X ↗</a>
+      </div>
+    </article>
+
+    <article class="tweet-card">
+      <div class="card-head"><span class="exhibit">Exhibit D</span><span>Apr · 2024</span></div>
+      <div class="handle">
+        <span class="avatar">E</span>
+        <span><span class="name">Elon Musk</span> <span class="user">@elonmusk</span></span>
+      </div>
+      <p class="tweet-text"><em>"Groks like Grok."</em></p>
+      <div class="card-foot">
+        <span class="caption">Grok / Grok / Grok</span>
+        <a class="link" href="https://x.com/elonmusk/status/1781190629612990506" target="_blank" rel="noopener">View on X ↗</a>
+      </div>
+    </article>
+
+    <article class="tweet-card">
+      <div class="card-head"><span class="exhibit">Exhibit E</span><span>Dec · 2024</span></div>
+      <div class="handle">
+        <span class="avatar">E</span>
+        <span><span class="name">Elon Musk</span> <span class="user">@elonmusk</span></span>
+      </div>
+      <p class="tweet-text"><em>"Grok groks it."</em></p>
+      <div class="card-foot">
+        <span class="caption">Peak Groksmanship</span>
+        <a class="link" href="https://x.com/elonmusk/status/1867454261073944807" target="_blank" rel="noopener">View on X ↗</a>
+      </div>
+    </article>
+
+    <article class="tweet-card">
+      <div class="card-head"><span class="exhibit">Exhibit F</span><span>2025</span></div>
+      <div class="handle">
+        <span class="avatar">E</span>
+        <span><span class="name">Elon Musk</span> <span class="user">@elonmusk</span></span>
+      </div>
+      <p class="tweet-text"><em>"Grok groks."</em></p>
+      <div class="card-foot">
+        <span class="caption">Verb Activated</span>
+        <a class="link" href="https://x.com/elonmusk/status/2025078689872949440" target="_blank" rel="noopener">View on X ↗</a>
+      </div>
+    </article>
+
+    <article class="tweet-card">
+      <div class="card-head"><span class="exhibit">Exhibit G</span><span>2025</span></div>
+      <div class="handle">
+        <span class="avatar">E</span>
+        <span><span class="name">Elon Musk</span> <span class="user">@elonmusk</span></span>
+      </div>
+      <p class="tweet-text"><em>"Grok groks."</em></p>
+      <div class="card-foot">
+        <span class="caption">Still Grokking</span>
+        <a class="link" href="https://x.com/elonmusk/status/2035320820088901928" target="_blank" rel="noopener">View on X ↗</a>
+      </div>
+    </article>
+
+    <article class="tweet-card">
+      <div class="card-head"><span class="exhibit">Exhibit H</span><span>2025</span></div>
+      <div class="handle">
+        <span class="avatar">E</span>
+        <span><span class="name">Elon Musk</span> <span class="user">@elonmusk</span></span>
+      </div>
+      <p class="tweet-text"><em>"Grok groks."</em></p>
+      <div class="card-foot">
+        <span class="caption">Sustained Campaign</span>
+        <a class="link" href="https://x.com/elonmusk/status/2040535647866474815" target="_blank" rel="noopener">View on X ↗</a>
+      </div>
+    </article>
+
+    <article class="tweet-card">
+      <div class="card-head"><span class="exhibit">Exhibit I</span><span>2025</span></div>
+      <div class="handle">
+        <span class="avatar">E</span>
+        <span><span class="name">Elon Musk</span> <span class="user">@elonmusk</span></span>
+      </div>
+      <p class="tweet-text"><em>"Grok groks."</em></p>
+      <div class="card-foot">
+        <span class="caption">He Will Not Stop</span>
+        <a class="link" href="https://x.com/elonmusk/status/2043293725804421596" target="_blank" rel="noopener">View on X ↗</a>
+      </div>
+    </article>
+
+    <article class="tweet-card">
+      <div class="card-head"><span class="exhibit">Exhibit J</span><span>2025</span></div>
+      <div class="handle">
+        <span class="avatar">E</span>
+        <span><span class="name">Elon Musk</span> <span class="user">@elonmusk</span></span>
+      </div>
+      <p class="tweet-text"><em>"Grok groks."</em></p>
+      <div class="card-foot">
+        <span class="caption">Double Grok Day</span>
+        <a class="link" href="https://x.com/elonmusk/status/2045292691248840918" target="_blank" rel="noopener">View on X ↗</a>
+      </div>
+    </article>
+
+    <article class="tweet-card">
+      <div class="card-head"><span class="exhibit">Exhibit K</span><span>2025</span></div>
+      <div class="handle">
+        <span class="avatar">E</span>
+        <span><span class="name">Elon Musk</span> <span class="user">@elonmusk</span></span>
+      </div>
+      <p class="tweet-text"><em>"Grok groks."</em></p>
+      <div class="card-foot">
+        <span class="caption">Case Closed</span>
+        <a class="link" href="https://x.com/elonmusk/status/2045293976287141993" target="_blank" rel="noopener">View on X ↗</a>
+      </div>
+    </article>
+
+  </div>
+
+  <p style="margin-top: 40px; font-family: var(--mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--ink-50); text-align: center;">
+    ◆ Click any exhibit to verify on X. Texts shown are approximations — always grok the source. ◆
+  </p>
+</section>
+
+<div class="marquee">
+  <div class="marquee-track">
+    11 tweets and counting <span class="dot"></span> a man on a mission <span class="dot"></span> the most unhinged verb campaign in history <span class="dot"></span> and he's not even in the cap table <span class="dot"></span> 11 tweets and counting <span class="dot"></span> a man on a mission <span class="dot"></span> the most unhinged verb campaign in history <span class="dot"></span> and he's not even in the cap table <span class="dot"></span>
+  </div>
+</div>
+
+<section id="howto">
+  <div class="section-head">
+    <div class="num">§ 04 / Protocol</div>
+    <div class="ref">Four Steps</div>
+  </div>
+  <h2>How to <em>grok.</em></h2>
+
+  <div class="steps" style="margin-top: 60px;">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-body">
+        <h4>Get a Solana wallet.</h4>
+        <p>Phantom, Solflare, or Backpack. Fund it with SOL from your exchange of choice. This is the part where you pretend you know what you're doing.</p>
+      </div>
+      <div class="step-arrow">→</div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-body">
+        <h4>Copy the $GROKS contract.</h4>
+        <p>Scroll to the hero. Grab the CA. <strong>Always verify</strong> from an official source before you ape in. Scammers grok too.</p>
+      </div>
+      <div class="step-arrow">→</div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-body">
+        <h4>Swap on Jupiter, PumpFun, or Raydium.</h4>
+        <p>Paste the contract. Set slippage responsibly-ish. Size the position in a way a grown person would. Click swap. You are now, technically and spiritually, grokking.</p>
+      </div>
+      <div class="step-arrow">→</div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-body">
+        <h4>Spread the verb.</h4>
+        <p>Tweet "grok groks" at <strong>@elonmusk</strong>. Reply under every Grok update. This is the utility. This is the roadmap. This is the staking mechanism.</p>
+      </div>
+      <div class="step-arrow">→</div>
+    </div>
+  </div>
+</section>
+
+<section id="tokenomics">
+  <div class="section-head">
+    <div class="num">§ 05 / Numbers</div>
+    <div class="ref">Tokenomics</div>
+  </div>
+  <h2>The <em>numbers.</em></h2>
+
+  <div class="token-grid" style="margin-top: 60px;">
+    <div class="stat">
+      <div class="stat-label">Ticker</div>
+      <div class="stat-value">$GROKS</div>
+      <div class="stat-sub">The verb. On-chain.</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Supply</div>
+      <div class="stat-value">1B</div>
+      <div class="stat-sub">One billion groks</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Chain</div>
+      <div class="stat-value">SOL</div>
+      <div class="stat-sub">Solana</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Launchpad</div>
+      <div class="stat-value">PUMP<em>.fun</em></div>
+      <div class="stat-sub">Fair launch</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Buy / Sell Tax</div>
+      <div class="stat-value">0%</div>
+      <div class="stat-sub">No fees</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Team Allocation</div>
+      <div class="stat-value">0%</div>
+      <div class="stat-sub">No presale</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Liquidity</div>
+      <div class="stat-value">Burned</div>
+      <div class="stat-sub">On launch</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Utility</div>
+      <div class="stat-value"><em>Grokking</em></div>
+      <div class="stat-sub">24/7 · No breaks</div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee inverted">
+  <div class="marquee-track">
+    grok groks <span class="dot"></span> grok groks <span class="dot"></span> grok groks <span class="dot"></span> grok groks <span class="dot"></span> grok groks <span class="dot"></span> grok groks <span class="dot"></span> grok groks <span class="dot"></span> grok groks <span class="dot"></span> grok groks <span class="dot"></span> grok groks <span class="dot"></span> grok groks <span class="dot"></span> grok groks <span class="dot"></span> grok groks <span class="dot"></span> grok groks <span class="dot"></span>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-inner">
+    <div class="foot-top">
+      <div class="foot-mark"><em>grok</em>s.</div>
+      <div class="foot-links">
+        <a href="#" target="_blank">X / Twitter</a>
+        <a href="#" target="_blank">Telegram</a>
+        <a href="#" target="_blank">PumpFun</a>
+        <a href="#" target="_blank">DexScreener</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© MMXXVI — $GROKS</span>
+      <span>We grokked. You grokked. He / she / it groks.</span>
+      <span>Ref. 001 / Solana</span>
+    </div>
+    <p class="disclaimer">
+      $GROKS is a meme coin with no intrinsic value or expectation of financial return. There is no formal team, roadmap, or guarantee of anything. This site is parody content and is not affiliated with Elon Musk, xAI, Grok, X Corp., or any other entity. Nothing here is financial advice. Crypto is volatile and you may lose 100% of what you put in. Only grok what you can afford to grok.
+    </p>
+  </div>
+</footer>
+
+<script>
+  console.log('%c grok groks ', 'background:#fff;color:#000;font-size:36px;font-family:serif;font-style:italic;padding:8px 16px;');
+</script>
+
+</body>
+</html>
